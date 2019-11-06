@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 创建一个对象,里面包含:小明,18岁,sayHi函数
+    // 方法一:字面量
+    // var person = {
+    //     name: "小明",
+    //     age: 18,
+    //     sayHi: function () {
+    //         console.log("hi");
+    //     }
+    // }
+    // console.log(person);
+    // new Object()方法
+    // var person =new Object();
+    // person.name="小明";
+    // person.age=18;
+    // person.sayHi=function(){
+    //     console.log("hi");
+        
+    // }
+    // console.log(person);
+
+    //工厂函数方法:
+    // function createPerson(name,age,logData){
+    //     var person =new Object();
+    //     person.name=name;
+    //     person.age=age;
+    //     person.sayHi=function(){
+    //         console.log(logData);
+            
+    //     }
+    //     return person;
+    // }
+    // var person=createPerson('小明',18,"hi")
+    // console.log(person);
+
+    // 构造函数方法:
+    // function Person(name,age,logData){
+        
+    //     this.name=name;
+    //     this.age=age;
+    //     this.sayHi=function(){
+    //         console.log(logData);  
+    //     }
+    //     console.log(this);//this是对象本身
+    // }
+    // var person=new Person('小明',18,"hi")
+    // console.log(person);
+    // 创建一个对象,里面包含:小明,18岁,sayHi函数
+
+    function createPerson(name,age,fnData){
+        var person=new Object();
+        person.name=name;
+        person.age=age;
+        person.sayHi=function(){
+            console.log(fnData);
+            
+        }
+        return person;
+
+    }
+    
+    var p=createPerson('小明',18,"hi")
+    console.log(p);
+    
+</script>
