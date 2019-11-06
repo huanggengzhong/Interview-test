@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 预解析:
+    var a;
+a = 25;
+function abc (){
+    var a;
+  alert(a);//undefined
+   a = 10;
+}
+function a() {
+  console.log('aaaaa');//没有调用,不会打印
+}
+abc();
+// 如果变量和函数同名的话，函数优先
+console.log(a);//打印开头的25
+
+a = 1;
+console.log(a);//打印重新赋值的a
+</script>
