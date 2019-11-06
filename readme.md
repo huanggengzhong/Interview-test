@@ -77,9 +77,10 @@ console.log(a);//只有局部f1里才有,全局里没有,直接报错
 
 #### 二.对象
 
-##### 1.创建对象的常见四种方法
+##### 创建对象的方法
+引言:我平时项目中一般四种方法比较常用,但我看了<<javascript高级程序设计>>这本书之后发现有9种方法,分别是:
 
-字面量方法:
+1.字面量方法:
 
 ```js
     var person = {
@@ -91,7 +92,7 @@ console.log(a);//只有局部f1里才有,全局里没有,直接报错
     }
     console.log(person);
 ```
-new Object()创建方法:
+2.new Object()创建方法:
 
 ```js
   var person =new Object();
@@ -104,7 +105,7 @@ new Object()创建方法:
     console.log(person);
 ```
 
-工厂模式创建对象方法:(是new Object()创建的升级,实际是封装函数后将对象返回出来)
+3.工厂模式创建对象方法:(是new Object()创建的升级,实际是封装函数后将对象返回出来)
 
 ```js
  function createPerson(name,age,logData){
@@ -119,7 +120,8 @@ new Object()创建方法:
     var person=createPerson('小明',18,"hi")
     console.log(person);
 ```
-构造函数方法:
+4.构造函数方法:
+
 ```js
     function Person(name,age,logData){
         
@@ -142,7 +144,7 @@ b.要使用new关键字;
 
 
 
-##### 2.构造函数new关键字做的四件事
+构造函数new关键字做的四件事:
 
 提示:结合工厂函数和构造函数对比发现
 
@@ -153,3 +155,84 @@ b.new会让this指向这个心的空对象;
 c.执行构造函数,给这个新的空对象添加属性和方法;
 
 d.最后,new会将有值的新对象进行返回;
+
+5.原型链方法:
+
+```js
+    function Person() {}
+    Person.prototype.name = "小明";
+    Person.prototype.age = 18;
+    Person.prototype.sayHi = function () {
+        console.log("hi");
+
+    }
+    var person = new Person();
+    console.log(person);//它会从原型里找到
+```
+
+
+
+6.构造函数和原型链组合方法:(实际就是一部分写在构造函数里,一部分写在原型里)
+
+```js
+ function Person(name) {
+        this.name = name;
+    }
+    Person.prototype = {
+        constructor: Person, //这里不写也不会受影响
+        age: 18,
+        sayHi: function () {
+            console.log("hi");
+        }
+    }
+    var person = new Person("小明")
+    console.log(person);
+```
+
+7.动态原型方法:(实际构造函数里面加了一个方法判断,判断方法不存在的情况下才加方法)
+
+```js
+    function Person(name,age,fnData){
+        this.name=name;
+        this.age=age;
+        if(typeof this.sayHi !='function'){
+            Person.prototype.sayHi=function(){
+                console.log(fnData);
+            }
+        }
+    }
+    var person=new Person('小明',18,"hi");
+    console.log(person);
+```
+8.寄生构造函数方法:(书中说了跟工厂模式一模一样)
+9.稳妥的构造函数方法:
+
+```js
+    function Person(name,age,fnData) {
+        var person =new Object()
+        person.sayHi=function(){
+            console.log(fnData);
+        }
+        return person
+    }
+    var person=Person("小明",18,"hi")
+    console.log(person.sayHi());//用哪个值构造函数只写哪个,让不用的属性无法访问
+```
+
+
+
+
+
+ #### 三this指向和上下文模式
+
+
+
+#### 四.原型链
+完整的原型链图:
+
+![1573051427133](C:\Users\91583\AppData\Roaming\Typora\typora-user-images\1573051427133.png)
+
+
+
+#### 五.继承
+
