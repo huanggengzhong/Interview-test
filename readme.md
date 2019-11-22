@@ -294,12 +294,58 @@ d.最后,new会将有值的新对象进行返回;
     var s= Student('小明',18)//打印window
 ```
 
-#### 五.原型链
+
+#### 五.修改函数内部this执行的方法(又叫函数的上下文调用模式)
+
+我们可以使用Function.prototype里的call(),apply()和bind()方法.
+
+```js
+ //1.call();
+    // // 语法:函数名.call(修改后的this指向,参数1,参数2,...)
+    // // 特点:会调用这个函数
+    function getSum(a,b) {
+        console.log(a+b);
+        console.log(this);    
+    }
+    // getSum(1,2)//普通调用,this指向window
+    getSum.call(obj,1,2)//this指向obj对象了
+
+    // 2.apply();
+    // 语法:函数名.apply(修改后的this指向,[参数1,参数2,...]),与call()不一样的是apply方法只能写两个参数,参数2是数组,里面可以写多个要传递的元素
+    // 特点:会调用这个函数
+     function getSum(a,b) {
+        console.log(a+b);
+        console.log(this);    
+    }
+    // getSum(1,2)//普通调用,this指向window
+    getSum.apply(obj,[1,2])//this改为了obj对象
+
+    // 3.bind();
+    // 语法:函数名.bind(新的this指向对象,参数1,参数2...)
+    // 特点:最大特点不会执行,只是返回一个修改了this后的函数
+    function getSum(a,b) {
+        console.log(a+b);
+        console.log(this);    
+    }
+    // getSum.bind(obj)//不会打印,代表不会调用
+    var fn=getSum.bind(obj,1,1);
+    // console.log(fn);//这里还是添加了默认参数的getSum函数
+    fn()//这里调用,打印this是obj对象    
+
+
+```
+
+修改上下文注意点:
+
+![1574440603082](C:\Users\91583\AppData\Roaming\Typora\typora-user-images\1574440603082.png)
+
+#### 六.原型链
+
 完整的原型链图:
 
 ![1573056393934](C:\Users\91583\AppData\Roaming\Typora\typora-user-images\1573056393934.png)
 
 
 
-#### 六.继承
+#### 七.继承
 
