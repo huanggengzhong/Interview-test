@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+//  var x=1;
+//  var y=0;
+ 
+//  function add(n) {
+//      n=n+1;
+     
+//  }
+
+ 
+//  y=add(x)
+// console.log(y);//没有返回值,所以是undefined
+// console.log(null==undefined);
+function Dog(){
+        this.name = "dog";
+        this.showName=function(){
+            console.log("这是一条"+this.name+"!")
+        }
+    }
+    function Cat(){
+        this.name="cat";
+        // Dog.apply(this)
+        this.showName=function(){
+            console.log(this.name+" eat fish");
+        }
+        console.log(this);//Cat对象
+        
+        Dog.apply(this)
+    };
+    var cat = new Cat()
+    // Dog.call(cat)    /*call的用法*/
+    cat.showName()        /*这是一条dog*/
+    console.log(cat.name)    /*dog*/
+
+
+</script>

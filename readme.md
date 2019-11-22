@@ -163,6 +163,10 @@ c.执行构造函数,给这个新的空对象添加属性和方法;
 
 d.最后,new会将有值的新对象进行返回;
 
+注意:
+
+因为new关键字会自动帮我们返回他创建的对象,所以一般在构造函数中是不用写return返回值的, 那万一构造函数中就是写了return返回值,这样看返回值是简单类型还是引用类型,简单类型不影响,如果是复杂类型,那么这个返回值会覆盖原来new关键字自动返回的那个对象,这样使创建的对象直接变为复杂类型值.
+
 5.原型链方法:
 
 ```js
@@ -230,9 +234,65 @@ d.最后,new会将有值的新对象进行返回;
 
 
 
- #### 四.this指向和上下文模式
+ #### 四.函数内部this指向
 
+首先我们要知道这几个点:
 
+1.javascript是一种弱类型(可以随意赋值类型),动态类型检查(运行时才检查)的语言,这就导致函数内部this指向声明的话是不确定的,只有在调用时才可以确定;
+
+2.所以我们可以总结一句很有用的话:不管函数或者方法是如何声明的,要看这个函数或者方法是最终谁最终点的,这个this就指向谁.
+
+案例:
+
+```js
+  //1.普通函数中的this:指向window
+    function welcome(){
+        console.log(this);
+        
+    }
+    welcome();//window,相当于window.welcome();
+    
+    // ----------------------------------
+    // 2.对象方法中的this:对象点出来,指向这个对象
+    var obj={
+        name:"小明",
+        sayHi:function(){
+            console.log(this);
+            
+        }
+    }
+    obj.sayHi();//指向obj对象
+    // ----------------------------------
+    // 对象里的对象,最终谁点出来就是谁
+    var p1={
+        dog:{
+            name:'阿黄',
+            sayHi:function(){
+                console.log(this);
+            }
+        }
+    }
+    console.log(p1.dog.sayHi());//this是dog对象
+    // ----------------------------------
+
+    // 3.构造函数里的this,指向构造函数实例化的对象,这个对象值是已经添加对应的属性和值的对象
+    function Student(name,age) {
+        this.name=name;
+        console.log(this);
+        this.age=age;
+    }
+    var s=new Student('小明',18)//打印有小明的对象
+       
+        
+    // ---------------------------
+    // 构造函数忘记使用this的话,指向window
+    function Student(name,age) {
+        this.name=name;
+        console.log(this);//没有写new关键字,相当于给window添加属性和方法
+        this.age=age;
+    }
+    var s= Student('小明',18)//打印window
+```
 
 #### 五.原型链
 完整的原型链图:
